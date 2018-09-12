@@ -1,0 +1,8 @@
+---
+docker_containers:
+  - name: centos
+    image: kevincoakley/centos7-systemd
+    ports:
+      - "2222:22"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup"

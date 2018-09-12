@@ -1,5 +1,47 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Start the Docker containers
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - docker_containers.yml
+
+  vars:
+    - container_state: started
+    - container_privileged: true
+
+  roles:
+    - docker
+
+  tags:
+    - docker-start
+
+
+- name: Test the postgres role for CentOS
+  hosts: postgres
+  become: yes
+  become_method: sudo
+
   roles:
     - ansible-role-postgres
+    - postgres-test
+
+  tags:
+    - postgres
+
+
+- name: Stop the Docker containers
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - docker_containers.yml
+
+  vars:
+    - container_state: absent
+
+  roles:
+    - docker
+
+  tags:
+    - docker-stop
