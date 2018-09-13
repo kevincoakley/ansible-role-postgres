@@ -22,6 +22,15 @@
   become: yes
   become_method: sudo
 
+  vars:
+    - postgres_listen_addresses: "*"
+    - postgres_client_auth:
+      - type: host
+        database: all
+        user: all
+        address: 0.0.0.0/0
+        method: md5
+
   roles:
     - ansible-role-postgres
     - postgres-test
