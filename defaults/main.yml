@@ -1,2 +1,28 @@
 ---
-# defaults file for ansible-role-postgres
+postgres_10_repo_url: https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+postgres_listen_addresses: localhost
+postgres_client_auth: []
+# postgres_client_auth takes five elements: type, database, user, address, method and absent (optional).
+#  See documentation for pg_hba.conf
+#
+# Example:
+# - postgres_client_auth:
+#   - type: host
+#     database: all
+#     user: all
+#     address: 0.0.0.0/0
+#     method: md5
+#   - type: host
+#     database: all
+#     user: all
+#     address: 0.0.0.0/0
+#     method: ident
+#     state: absent
+postgres_config: []
+# postgres_config takes two elements: line and state (optional)
+#
+# Example:
+#  - postgres_config:
+#    - line: max_connections = 300
+#    - line: shared_buffers = 2GB
+#      state: absent
