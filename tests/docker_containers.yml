@@ -4,6 +4,6 @@ docker_containers:
     image: kevincoakley/centos7-systemd
     ports:
       - "2222:22"
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup"
