@@ -1,2 +1,58 @@
 ---
-# tasks file for ansible-role-postgres
+- name: Install postgresql 10 yum repository
+  package:
+    name: "{{ postgres_10_repo_url }}"
+    state: present
+
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - postgresql10-server
+    - postgresql10
+
+- name: Check if PG_VERSION exists
+  stat:
+    path: /var/lib/pgsql/10/data/PG_VERSION
+  register: pg_version
+
+- name: Initialize the system database
+  shell: /usr/pgsql-10/bin/postgresql-10-setup initdb
+  args:
+    executable: /bin/bash
+  when: pg_version.stat.exists == False
+
+- name: Configure postgresql client auth
+  lineinfile:
+    path: /var/lib/pgsql/10/data/pg_hba.conf
+    regexp: ^{{ item['type'] }}\s+{{ item['database'] }}\s+{{ item['user'] }}\s+{{ item['address'] }}\s+{{ item['method'] }}
+    line: "{{ item['type'] }}\t{{ item['database'] }}\t{{ item['user'] }}\t{{ item['address'] }}\t{{ item['method'] }}"
+    state: "{{ item['state'] | default(omit) }}"
+    backup: yes
+  with_items: "{{ postgres_client_auth }}"
+  notify: Restart postgresql
+
+- name: Configure postgresql to listen on all IP interfaces
+  lineinfile:
+    path: /var/lib/pgsql/10/data/postgresql.conf
+    regexp: "^listen_addresses = '{{ postgres_listen_addresses }}'"
+    insertafter: "^#listen_addresses = 'localhost'"
+    line: "listen_addresses = '{{ postgres_listen_addresses }}'"
+  notify: Restart postgresql
+
+- name: Custom postgresql Configuration
+  lineinfile:
+    path: /var/lib/pgsql/10/data/postgresql.conf
+    regexp: "^{{ item['line'] }}"
+    line: "{{ item['line'] }}"
+    state: "{{ item['state'] | default(omit) }}"
+    backup: yes
+  with_items: "{{ postgres_config }}"
+  notify: Restart postgresql
+
+- name: Ensure postgresql service is started and enabled on boot
+  systemd:
+    name: postgresql-10
+    state: started
+    enabled: yes
