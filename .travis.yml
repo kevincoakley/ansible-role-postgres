@@ -38,7 +38,7 @@ script:
   - ansible-playbook -i tests/inventory --skip-tags=docker-stop tests/test.yml -vvvv
   # Run again to test idempotence
   - >
-    ansible-playbook -i tests/inventory --tags=pgstattuple tests/test.yml
+    ansible-playbook -i tests/inventory --tags=postgres tests/test.yml
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
