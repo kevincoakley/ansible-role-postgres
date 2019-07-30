@@ -7,3 +7,10 @@ docker_containers:
       - "5433:5432"
     volumes:
       - "/sys/fs/cgroup:/sys/fs/cgroup"
+  - name: ubuntu
+    image: kevincoakley/ubuntu18.04-systemd
+    ports:
+      - "2200:22"
+      - "5434:5432"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup"

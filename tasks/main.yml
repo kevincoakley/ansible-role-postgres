@@ -1,31 +1,30 @@
 ---
-- name: Install postgresql 10 yum repository
-  package:
-    name: "{{ postgres_10_repo_url }}"
-    state: present
+- name: Include OS family specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include OS specific tasks
+  include_tasks: "{{ ansible_os_family }}.yml"
 
 - name: Install packages
   package:
     name: "{{ item }}"
     state: present
-  with_items:
-    - postgresql10-server
-    - postgresql10
+  with_items: "{{ postgresql_packages }}"
 
 - name: Check if PG_VERSION exists
   stat:
-    path: /var/lib/pgsql/10/data/PG_VERSION
+    path: "{{ postgresql_data_path }}/PG_VERSION"
   register: pg_version
 
 - name: Initialize the system database
-  shell: /usr/pgsql-10/bin/postgresql-10-setup initdb
+  shell: "{{ postgresql_setup_path }} initdb"
   args:
     executable: /bin/bash
-  when: pg_version.stat.exists == False
+  when: not pg_version.stat.exists
 
 - name: Configure postgresql client auth
   lineinfile:
-    path: /var/lib/pgsql/10/data/pg_hba.conf
+    path: "{{ postgresql_conf_path }}/pg_hba.conf"
     regexp: ^{{ item['type'] }}\s+{{ item['database'] }}\s+{{ item['user'] }}\s+{{ item['address'] }}\s+{{ item['method'] }}
     line: "{{ item['type'] }}\t{{ item['database'] }}\t{{ item['user'] }}\t{{ item['address'] }}\t{{ item['method'] }}"
     state: "{{ item['state'] | default(omit) }}"
@@ -35,7 +34,7 @@
 
 - name: Configure postgresql to listen on all IP interfaces
   lineinfile:
-    path: /var/lib/pgsql/10/data/postgresql.conf
+    path: "{{ postgresql_conf_path }}/postgresql.conf"
     regexp: "^listen_addresses = '{{ postgres_listen_addresses }}'"
     insertafter: "^#listen_addresses = 'localhost'"
     line: "listen_addresses = '{{ postgres_listen_addresses }}'"
@@ -43,7 +42,7 @@
 
 - name: Custom postgresql Configuration
   lineinfile:
-    path: /var/lib/pgsql/10/data/postgresql.conf
+    path: "{{ postgresql_conf_path }}/postgresql.conf"
     regexp: "^{{ item['line'] }}"
     line: "{{ item['line'] }}"
     state: "{{ item['state'] | default(omit) }}"
@@ -53,6 +52,6 @@
 
 - name: Ensure postgresql service is started and enabled on boot
   systemd:
-    name: postgresql-10
+    name: "{{ postgresql_service }}"
     state: started
     enabled: yes

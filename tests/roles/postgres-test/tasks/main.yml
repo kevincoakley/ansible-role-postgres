@@ -9,4 +9,4 @@
   become_method: sudo
   changed_when: False
   failed_when:
-    - '"PostgreSQL 10" not in postgresql_version.stdout'
+    - '"PostgreSQL 11" not in postgresql_version.stdout'

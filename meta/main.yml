@@ -1,6 +1,6 @@
 galaxy_info:
   author: Kevin Coakley
-  description: Install Postgres 10
+  description: Install Postgres 11
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -24,6 +24,10 @@ galaxy_info:
   - name: EL
     versions:
     - 7
+  - name: Ubuntu
+    versions:
+      - xenial
+      - bionic
 
   galaxy_tags:
   - database

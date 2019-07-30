@@ -9,3 +9,4 @@ localhost ansible_connection=local
 
 [postgres]
 centos ansible_host=127.0.0.1 ansible_port=2222
+ubuntu ansible_host=127.0.0.1 ansible_port=2200
