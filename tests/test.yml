@@ -17,7 +17,7 @@
     - docker-start
 
 
-- name: Test the postgres role for CentOS
+- name: Test the postgres role
   hosts: postgres
   become: yes
   become_method: sudo

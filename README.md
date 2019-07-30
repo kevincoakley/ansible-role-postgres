@@ -3,7 +3,7 @@ ansible-role-postgres
 
 [![Build Status](https://travis-ci.org/kevincoakley/ansible-role-postgres.svg?branch=master)](https://travis-ci.org/kevincoakley/ansible-role-postgres)
 
-Install Postgres 10. Tested with Postgres 10 on CentOS 7.
+Install Postgres 11. Tested with Postgres 11 on CentOS 7 and Ubuntu 18.04.
 
 Requirements
 ------------
@@ -23,7 +23,7 @@ None
 Example Playbook
 ----------------
   
-    - name: Postgres role for CentOS
+    - name: Postgres role 
       hosts: postgres
       become: yes
       become_method: sudo

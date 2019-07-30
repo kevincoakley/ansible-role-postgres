@@ -1,0 +1,7 @@
+---
+postgresql_packages:
+  - postgresql-11
+
+postgresql_service: postgresql
+postgresql_data_path: /var/lib/postgresql/11/main
+postgresql_conf_path: /etc/postgresql/11/main

@@ -1,0 +1,9 @@
+---
+postgresql_packages:
+  - postgresql11-server
+  - postgresql11
+
+postgresql_service: postgresql-11
+postgresql_setup_path: /usr/pgsql-11/bin/postgresql-11-setup
+postgresql_data_path: /var/lib/pgsql/11/data
+postgresql_conf_path: "{{ postgresql_data_path }}"
