@@ -28,7 +28,7 @@
     regexp: ^{{ item['type'] }}\s+{{ item['database'] }}\s+{{ item['user'] }}\s+{{ item['address'] }}\s+{{ item['method'] }}
     line: "{{ item['type'] }}\t{{ item['database'] }}\t{{ item['user'] }}\t{{ item['address'] }}\t{{ item['method'] }}"
     state: "{{ item['state'] | default(omit) }}"
-    backup: yes
+    backup: true
   with_items: "{{ postgres_client_auth }}"
   notify: Restart postgresql
 
@@ -46,7 +46,7 @@
     regexp: "^{{ item['line'] }}"
     line: "{{ item['line'] }}"
     state: "{{ item['state'] | default(omit) }}"
-    backup: yes
+    backup: true
   with_items: "{{ postgres_config }}"
   notify: Restart postgresql
 
@@ -54,4 +54,4 @@
   systemd:
     name: "{{ postgresql_service }}"
     state: started
-    enabled: yes
+    enabled: true

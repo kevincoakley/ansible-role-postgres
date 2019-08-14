@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Kevin Coakley
   description: Install Postgres 11
@@ -21,16 +22,15 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-  - name: EL
-    versions:
-    - 7
-  - name: Ubuntu
-    versions:
-      - xenial
-      - bionic
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - bionic
 
   galaxy_tags:
-  - database
-  - postgresql
+    - database
+    - postgresql
 
 dependencies: []
