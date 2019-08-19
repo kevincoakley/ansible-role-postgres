@@ -9,22 +9,22 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items: "{{ postgresql_packages }}"
+  with_items: "{{ postgresql_packages[postgres_major_version] }}"
 
 - name: Check if PG_VERSION exists
   stat:
-    path: "{{ postgresql_data_path }}/PG_VERSION"
+    path: "{{ postgresql_data_path[postgres_major_version] }}/PG_VERSION"
   register: pg_version
 
 - name: Initialize the system database
-  shell: "{{ postgresql_setup_path }} initdb"
+  shell: "{{ postgresql_setup_path[postgres_major_version] }} initdb"
   args:
     executable: /bin/bash
   when: not pg_version.stat.exists
 
 - name: Configure postgresql client auth
   lineinfile:
-    path: "{{ postgresql_conf_path }}/pg_hba.conf"
+    path: "{{ postgresql_conf_path[postgres_major_version] }}/pg_hba.conf"
     regexp: ^{{ item['type'] }}\s+{{ item['database'] }}\s+{{ item['user'] }}\s+{{ item['address'] }}\s+{{ item['method'] }}
     line: "{{ item['type'] }}\t{{ item['database'] }}\t{{ item['user'] }}\t{{ item['address'] }}\t{{ item['method'] }}"
     state: "{{ item['state'] | default(omit) }}"
@@ -34,7 +34,7 @@
 
 - name: Configure postgresql to listen on all IP interfaces
   lineinfile:
-    path: "{{ postgresql_conf_path }}/postgresql.conf"
+    path: "{{ postgresql_conf_path[postgres_major_version] }}/postgresql.conf"
     regexp: "^listen_addresses = '{{ postgres_listen_addresses }}'"
     insertafter: "^#listen_addresses = 'localhost'"
     line: "listen_addresses = '{{ postgres_listen_addresses }}'"
@@ -42,7 +42,7 @@
 
 - name: Custom postgresql Configuration
   lineinfile:
-    path: "{{ postgresql_conf_path }}/postgresql.conf"
+    path: "{{ postgresql_conf_path[postgres_major_version] }}/postgresql.conf"
     regexp: "^{{ item['line'] }}"
     line: "{{ item['line'] }}"
     state: "{{ item['state'] | default(omit) }}"
@@ -52,6 +52,6 @@
 
 - name: Ensure postgresql service is started and enabled on boot
   systemd:
-    name: "{{ postgresql_service }}"
+    name: "{{ postgresql_service[postgres_major_version] }}"
     state: started
     enabled: true

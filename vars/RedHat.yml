@@ -1,9 +1,21 @@
 ---
 postgresql_packages:
-  - postgresql11-server
-  - postgresql11
+  11:
+    - postgresql11-server
+    - postgresql11
+  10:
+    - postgresql10-server
+    - postgresql10
 
-postgresql_service: postgresql-11
-postgresql_setup_path: /usr/pgsql-11/bin/postgresql-11-setup
-postgresql_data_path: /var/lib/pgsql/11/data
-postgresql_conf_path: "{{ postgresql_data_path }}"
+postgresql_service:
+  11: postgresql-11
+  10: postgresql-10
+postgresql_setup_path:
+  11: /usr/pgsql-11/bin/postgresql-11-setup
+  10: /usr/pgsql-10/bin/postgresql-10-setup
+postgresql_data_path:
+  11: /var/lib/pgsql/11/data
+  10: /var/lib/pgsql/10/data
+postgresql_conf_path:
+  11: /var/lib/pgsql/11/data
+  10: /var/lib/pgsql/10/data

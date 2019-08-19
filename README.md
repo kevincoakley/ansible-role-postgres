@@ -3,7 +3,7 @@ ansible-role-postgres
 
 [![Build Status](https://travis-ci.org/kevincoakley/ansible-role-postgres.svg?branch=master)](https://travis-ci.org/kevincoakley/ansible-role-postgres)
 
-Install Postgres 11. Tested with Postgres 11 on CentOS 7 and Ubuntu 18.04.
+Install Postgres 10 or 11. Tested with Postgres 10 and 11 on CentOS 7 and Ubuntu 18.04.
 
 Requirements
 ------------
