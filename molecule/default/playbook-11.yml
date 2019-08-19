@@ -4,6 +4,7 @@
   become: true
 
   vars:
+    - postgres_major_version: 11
     - postgres_listen_addresses: "*"
     - postgres_client_auth:
         - type: host

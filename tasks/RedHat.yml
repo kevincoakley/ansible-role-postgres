@@ -1,5 +1,16 @@
 ---
-- name: Install postgresql 11 yum repository
-  package:
-    name: https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
-    state: present
+- name: postgresql 11 tasks
+  when: postgres_major_version == 11
+  block:
+    - name: Install postgresql 11 yum repository
+      package:
+        name: https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
+        state: present
+
+- name: postgresql 10 tasks
+  when: postgres_major_version == 10
+  block:
+    - name: Install postgresql 10 yum repository
+      package:
+        name: https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+        state: present
