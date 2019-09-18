@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: postgres
   author: Kevin Coakley
   description: Install Postgres 11
 
