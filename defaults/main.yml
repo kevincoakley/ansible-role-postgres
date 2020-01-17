@@ -1,8 +1,8 @@
 ---
-# Supported Java Versions:
-# CentOS 7: 10, or 11
-# Ubuntu 18.04: 10 or 11
-postgres_major_version: 11
+# Supported Postgresql Versions:
+# CentOS 7: 10, 11 or 12
+# Ubuntu 18.04: 10, 11 or 12
+postgres_major_version: 12
 postgres_listen_addresses: localhost
 postgres_client_auth: []
 # postgres_client_auth takes five elements: type, database, user, address, method and absent (optional).
