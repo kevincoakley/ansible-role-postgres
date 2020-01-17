@@ -1,16 +1,21 @@
 ---
 postgresql_packages:
+  12:
+    - postgresql-12
   11:
     - postgresql-11
   10:
     - postgresql-10
 
 postgresql_service:
+  12: postgresql
   11: postgresql
   10: postgresql
 postgresql_data_path:
+  12: /var/lib/postgresql/12/main
   11: /var/lib/postgresql/11/main
   10: /var/lib/postgresql/10/main
 postgresql_conf_path:
+  12: /etc/postgresql/12/main
   11: /etc/postgresql/11/main
   10: /etc/postgresql/10/main
