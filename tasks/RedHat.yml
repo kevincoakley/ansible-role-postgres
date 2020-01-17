@@ -15,5 +15,5 @@
 - name: Disable the built-in PostgreSQL module
   command: dnf -qy module disable postgresql
   args:
-    warn: false # set warn=false to prevent warning
+    warn: false  # set warn=false to prevent warning
   when: ansible_distribution_major_version == "8"
