@@ -1,10 +1,15 @@
 ---
+- name: Update the apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
 - name: Install packages required for adding the apt repository
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - gpg
+    - gpg-agent
 
 - name: Add an apt signing key, uses whichever key is at the URL
   apt_key:
