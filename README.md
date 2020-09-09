@@ -36,6 +36,10 @@ Example Playbook
             user: all
             address: 0.0.0.0/0
             method: md5
+          - type: local
+            database: all
+            user: all
+            method: md5
     
       roles:
         - ansible-role-postgres
