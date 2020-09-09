@@ -1,0 +1,17 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    - postgres_major_version: 10
+    - postgres_listen_addresses: "*"
+    - postgres_client_auth:
+        - type: host
+          database: all
+          user: all
+          address: 0.0.0.0/0
+          method: md5
+
+  roles:
+    - role: ansible-role-postgres
