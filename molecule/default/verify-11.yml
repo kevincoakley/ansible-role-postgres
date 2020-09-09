@@ -1,22 +1,9 @@
 ---
-- name: Converge
+- name: Verify
   hosts: all
   become: true
 
-  vars:
-    - postgres_major_version: 11
-    - postgres_listen_addresses: "*"
-    - postgres_client_auth:
-        - type: host
-          database: all
-          user: all
-          address: 0.0.0.0/0
-          method: md5
-
-  roles:
-    - role: ansible-role-postgres
-
-  post_tasks:
+  tasks:
     - name: Test if the postgres 11 is running
       shell: psql -c "SELECT version();"
       args:
