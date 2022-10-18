@@ -1,0 +1,7 @@
+---
+warn_list:
+  - internal-error
+  - role-name
+  - fqcn-builtins
+skip_list:
+  - yaml
