@@ -3,5 +3,6 @@ warn_list:
   - internal-error
   - role-name
   - fqcn-builtins
+  - no-tabs
 skip_list:
   - yaml
