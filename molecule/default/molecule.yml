@@ -10,7 +10,7 @@ lint: |
   flake8
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-rockylinux8}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -22,8 +22,8 @@ provisioner:
   options:
     vvv: false
   playbooks:
-    converge: "converge-${MOLECULE_PLAYBOOK:-11}.yml"
-    verify: "verify-${MOLECULE_PLAYBOOK:-11}.yml"
+    converge: "converge-${MOLECULE_PLAYBOOK:-15}.yml"
+    verify: "verify-${MOLECULE_PLAYBOOK:-15}.yml"
 scenario:
   name: default
 verifier:
