@@ -28,9 +28,9 @@ postgresql_data_path:
   11: /var/lib/postgresql/11/main
   10: /var/lib/postgresql/10/main
 postgresql_conf_path:
-  15: /etc/postgresql/12/main
-  14: /etc/postgresql/12/main
-  13: /etc/postgresql/12/main
+  15: /etc/postgresql/15/main
+  14: /etc/postgresql/14/main
+  13: /etc/postgresql/13/main
   12: /etc/postgresql/12/main
   11: /etc/postgresql/11/main
   10: /etc/postgresql/10/main
