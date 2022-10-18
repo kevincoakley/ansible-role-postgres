@@ -3,7 +3,7 @@ ansible-role-postgres
 
 ![](https://github.com/kevincoakley/ansible-role-postgres/workflows/Molecule%20Test/badge.svg)
 
-Install Postgres 10, 11 or 12. Tested with Postgres 10, 11 and 12 on CentOS 7, CentOS 8, Ubuntu 18.04, Ubuntu 20.04.
+Install Postgres 10, 11, 12, 13, 14, & 15. Tested with Postgres 10, 11, 12, 13, 14, & 15 and CentOS 8, Ubuntu 20.04 & Ubuntu 22.04.
 
 Requirements
 ------------

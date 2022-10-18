@@ -1,8 +1,9 @@
 ---
 galaxy_info:
   role_name: postgres
+  namespace: kevincoakley
   author: Kevin Coakley
-  description: Install Postgres 10, 11 or 12
+  description: Install Postgres 10, 11, 12, 13, 14, or 15
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -17,7 +18,7 @@ galaxy_info:
   # - CC-BY
   license: BSD
 
-  min_ansible_version: 2.5
+  min_ansible_version: "2.5"
 
   #
   # platforms is a list of platforms, and each platform has a name and a list of versions.
@@ -25,12 +26,11 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-        - 7
-        - 8
+        - "8"
     - name: Ubuntu
       versions:
-        - bionic
         - focal
+        - jammy
 
   galaxy_tags:
     - database
